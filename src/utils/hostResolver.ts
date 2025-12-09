@@ -2,11 +2,11 @@ import { headers } from "next/headers";
 
 export function resolveDomain(): string {
   const headersList = headers();
-  let domain = headersList.get("host") || "letrafutar.hu"; // Fallback if host is missing
+  let domain = "leiterkurier.com"; // Fallback if host is missing
 
   // Check if the host contains "localhost"
   if (domain.includes("localhost")) {
-    domain = "letrafutar.hu";
+    domain = "leiterkurier.com";
   }
 
   if (typeof window === "undefined" && domain) {
