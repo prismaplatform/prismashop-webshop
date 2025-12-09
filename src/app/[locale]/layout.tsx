@@ -113,16 +113,18 @@ export default async function RootLayout({
     }
   }
 
-  const availableLanguages = await getLanguages();
-  const supportedLocales = availableLanguages.map(
-    (lang: Language) => lang.slug,
-  );
-  if (!supportedLocales.includes(locale)) {
-    const defaultLocale = supportedLocales.includes("ro")
-      ? "ro"
-      : supportedLocales[0] || "ro";
-    redirect(`/${defaultLocale}`);
-  }
+  // const availableLanguages = await getLanguages();
+  // const supportedLocales = availableLanguages.map(
+  //   (lang: Language) => lang.slug,
+  // );
+  // if (!supportedLocales.includes(locale)) {
+  //   const defaultLocale = supportedLocales.includes("ro")
+  //     ? "ro"
+  //     : supportedLocales[0] || "ro";
+  //   redirect(`/${defaultLocale}`);
+  // }
+
+  redirect(`/de`);
 
   const compiledCss = await getCompiledScss(domain);
   const marketingIds = await getMarketingTags(domain);
