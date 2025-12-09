@@ -58,7 +58,7 @@ export default async function RootLayout({
   children: React.ReactNode;
   params: { locale: string };
 }) {
-  const domain = slugifyDomain(resolveDomain());
+  const domain = "leiterkurierat";
   
   const cookieStore = cookies();
 
