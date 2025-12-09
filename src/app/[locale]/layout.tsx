@@ -113,10 +113,7 @@ export default async function RootLayout({
     }
   }
 
-  const availableLanguages = await getLanguages();
-  const supportedLocales = availableLanguages.map(
-    (lang: Language) => lang.slug,
-  );
+  const supportedLocales = ["de"];
   if (!supportedLocales.includes(locale)) {
      redirect("/de");
   }
