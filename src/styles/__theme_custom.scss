@@ -1,0 +1,884 @@
+.root {
+  overflow: hidden;
+}
+
+.z-max {
+  z-index: 999999;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.hiddenScrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.hiddenScrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.customScrollBar {
+  /* width */
+  &::-webkit-scrollbar {
+    height: 5px;
+  }
+
+  /* Track */
+  &::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+  }
+
+  /* Handle */
+  &::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: #888;
+  }
+
+  /* Handle on hover */
+  &::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+}
+
+//
+
+.nc-will-change-top {
+  will-change: top;
+}
+
+//
+
+.nc-SectionClientSay .glide__bullet--active {
+  @apply bg-neutral-700;
+}
+
+.nc-GallerySlider .glide__bullet--active {
+  @apply bg-white w-2 h-2;
+}
+
+.ProductDetailModalPhotos .glide__bullet--active {
+  @apply block;
+}
+
+//
+.nc-card-title {
+  @apply transition-colors  hover:text-primary-900 dark:hover:text-primary-300 duration-75;
+}
+
+//
+.menuIsNew_lv1 {
+  > a::before {
+    content: "New!";
+    position: absolute;
+    top: -2px;
+    right: 0;
+    display: inline-block;
+    padding: 0 5px;
+    line-height: 15px;
+    border-radius: 4px;
+    background-color: #f35656;
+    color: #fff;
+    font-size: 10px;
+    font-weight: normal;
+  }
+}
+
+.menuIsNew {
+  > a::after {
+    content: "New!";
+    display: inline-block;
+    padding: 0 5px;
+    line-height: 15px;
+    border-radius: 4px;
+    background-color: #f35656;
+    color: #fff;
+    font-size: 10px;
+    margin-left: 6px;
+  }
+}
+
+//
+.nc-PostCardCommentBtn,
+.nc-PostCardLikeAction,
+.nc-CommentCardLikeReply > button {
+  &:hover {
+    span {
+      color: inherit;
+    }
+  }
+}
+
+//
+.nc-box-has-hover {
+  @apply bg-white rounded-3xl border border-neutral-200/70 hover:bg-neutral-50 hover:shadow-xl hover:border-transparent transition-shadow;
+}
+
+.nc-dark-box-bg-has-hover {
+  @apply dark:bg-neutral-900 dark:border dark:border-neutral-700 dark:hover:bg-neutral-800 dark:hover:shadow-2xl;
+}
+
+.nc-dark-box-bg {
+  @apply dark:bg-neutral-900 dark:border dark:border-neutral-700 dark:shadow-2xl;
+}
+
+//
+.nc-origin-100 {
+  transform-origin: 100% 50% 0px;
+}
+
+.nc-origin-50 {
+  transform-origin: 50% 50% 0px;
+}
+
+// HERO
+.nc-hero-field-padding {
+  @apply py-3 px-4 md:py-4 md:px-6 xl:py-6 xl:px-8;
+}
+
+.nc-hero-field-focused {
+  @apply shadow-2xl rounded-full dark:bg-white/5;
+}
+
+.nc-icon-field {
+  @apply w-5 h-5 lg:w-7 lg:h-7;
+}
+
+//
+button.gm-control-active.gm-fullscreen-control {
+  @apply rounded-xl #{!important};
+}
+
+//
+.nc-FiveStartIconForRate {
+  svg:hover ~ svg {
+    @apply text-neutral-300;
+  }
+}
+
+/*
+ */
+.nc-shadow-lg {
+  box-shadow: 2px 8px 40px rgba(0, 0, 0, 0.08);
+}
+
+.hover\:nc-shadow-lg:hover {
+  box-shadow: 2px 8px 40px rgba(0, 0, 0, 0.08);
+}
+
+.nc-shadow-sketch {
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+
+.hover\:nc-shadow-sketch:hover {
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+
+.nc-p-l-container {
+  padding-left: 16px;
+  @screen sm {
+    padding-left: calc((100vw + 32px - 640px) / 2);
+  }
+  @screen md {
+    padding-left: calc((100vw + 32px - 768px) / 2);
+  }
+  @screen lg {
+    padding-left: calc((100vw + 32px - 1024px) / 2);
+  }
+  @screen xl {
+    padding-left: calc((100vw + 80px - 1280px) / 2);
+  }
+  @screen 2xl {
+    padding-left: calc((100vw + 256px - 1536px) / 2);
+  }
+}
+
+.nc-p-r-container {
+  padding-right: 16px;
+  @screen sm {
+    padding-right: calc((100vw + 32px - 640px) / 2);
+  }
+  @screen md {
+    padding-right: calc((100vw + 32px - 768px) / 2);
+  }
+  @screen lg {
+    padding-right: calc((100vw + 32px - 1024px) / 2);
+  }
+  @screen xl {
+    padding-right: calc((100vw + 80px - 1280px) / 2);
+  }
+  @screen 2xl {
+    padding-right: calc((100vw + 256px - 1536px) / 2);
+  }
+}
+
+// LISTING PAGE DETAIL
+.listingSection__wrap--old {
+  @apply w-full flex flex-col sm:rounded-2xl border-b sm:border-t sm:border-l sm:border-r border-neutral-200 dark:border-neutral-700 space-y-6 sm:space-y-8 pb-10 px-0 sm:p-4 xl:p-8;
+}
+
+.listingSectionSidebar__wrap {
+  @apply w-full flex flex-col sm:rounded-2xl sm:border border-neutral-200 dark:border-neutral-700 space-y-6 sm:space-y-8 sm:pb-10 px-0 sm:p-4 xl:p-8;
+}
+
+.listingSection__wrap {
+  @apply w-full flex flex-col border-b border-neutral-200 dark:border-neutral-700 space-y-6 sm:space-y-8 pb-14;
+}
+
+//
+input[type="time"]::-webkit-calendar-picker-indicator {
+  @apply dark:bg-neutral-500 rounded-md;
+}
+
+[type="button"] {
+  -webkit-appearance: none !important;
+}
+
+//
+.nc-product-notify-animation {
+  animation-name: ncSlideLeft;
+  animation-duration: 300ms;
+  animation-timing-function: ease-in-out;
+}
+
+.nc-product-notify-animation-out {
+  animation-name: ncSlideRight;
+  animation-duration: 300ms;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes ncSlideLeft {
+  from {
+    transform: translateX(200px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0px);
+    opacity: 1;
+  }
+}
+
+@keyframes ncSlideRight {
+  from {
+    transform: translateX(0px);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(200px);
+    opacity: 0;
+  }
+}
+
+@keyframes CardLarge1ExampleRight {
+  from {
+    transform: scale(1.05) translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1) translateY(0px);
+    opacity: 1;
+  }
+}
+
+@keyframes CardLarge1ExampleLeft {
+  from {
+    transform: translateX(-50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes SectionHero2ItemLeft {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes SectionHero2ItemDot {
+  from {
+    width: 30px;
+    opacity: 0;
+  }
+  to {
+    width: 80px;
+    opacity: 1;
+  }
+}
+
+/* == */
+.nc-SectionHero2Item--animation {
+  .nc-SectionHero2Item__dot {
+    animation-name: SectionHero2ItemDot;
+    animation-duration: 150ms;
+    animation-timing-function: linear;
+  }
+
+  .nc-SectionHero2Item__image {
+    animation-name: CardLarge1ExampleRight;
+    animation-duration: 650ms;
+    animation-timing-function: ease-in-out;
+  }
+
+  .nc-SectionHero2Item__left {
+    animation-name: SectionHero2ItemLeft;
+    animation-duration: 600ms;
+    animation-timing-function: ease-in-out;
+  }
+
+  .nc-SectionHero2Item__button {
+    animation-name: CardLarge1ExampleLeft;
+    animation-duration: 600ms;
+    animation-timing-function: ease-in-out;
+  }
+
+  .nc-SectionHero2Item__heading {
+    animation-name: CardLarge1ExampleLeft;
+    animation-duration: 600ms;
+    animation-timing-function: ease-in-out;
+  }
+
+  .nc-SectionHero2Item__subheading {
+    animation-name: CardLarge1ExampleLeft;
+    animation-timing-function: ease-in-out;
+    animation-duration: 400ms;
+  }
+}
+
+@media (min-aspect-ratio: 3/2) {
+  .wide\:h-full {
+    height: 100%;
+  }
+}
+
+@media (min-width: 1280px) {
+  @media (min-height: 854px) {
+    .xl\:taller-than-854\:h-auto {
+      height: auto;
+    }
+  }
+}
+
+.rc-slider-track,
+.rc-slider-tracks {
+  background: var(--c-primary-500);
+}
+
+.rc-slider-handle {
+  border: solid 2px var(--c-primary-500);
+}
+
+.rc-slider-handle:active {
+  border-color: var(--c-primary-500);
+  box-shadow: 0 0 5px var(--c-primary-300);
+  cursor: grabbing;
+}
+
+.rc-slider-handle:hover {
+  border-color: var(--c-primary-500);
+  box-shadow: 0 0 5px var(--c-primary-300);
+  cursor: grabbing;
+}
+
+.rc-slider-handle:focus-visible {
+  border-color: var(--c-primary-500);
+  box-shadow: 0 0 5px var(--c-primary-50);
+}
+
+.wh-35px {
+  width: 35px;
+  height: 35px;
+}
+
+.wh-40px {
+  height: 45px;
+}
+
+.filterVariants {
+  min-height: 150px;
+  overflow-y: scroll;
+}
+
+.filterVariants::-webkit-scrollbar {
+  display: none;
+}
+
+div:where(.swal2-container) button:where(.swal2-styled):where(.swal2-confirm) {
+  background-color: var(--c-primary-500) !important;
+}
+
+$secondary-colors: (50, 100, 200, 300, 400, 500, 600, 700, 800, 900);
+
+@each $value in $secondary-colors {
+  .bg-secondary-#{$value} {
+    background-color: var(--c-secondary-#{$value}) !important;
+  }
+  .text-secondary-#{$value} {
+    color: var(--c-secondary-#{$value}) !important;
+  }
+  .border-secondary-#{$value} {
+    border-color: var(--c-secondary-#{$value}) !important;
+  }
+}
+
+.flag-emoji {
+  font-family: 'Segoe UI Emoji', 'Apple Color Emoji', 'NotoColorEmoji', 'Android Emoji', 'Emoji', sans-serif;
+}
+
+
+.swiper-button-prev {
+  color: var(--c-primary-900) !important; 
+}
+
+.swiper-button-next {
+  color: var(--c-primary-900) !important; 
+}
+
+.modal {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.modal.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+
+.object-bottom {
+  object-position: bottom !important;
+}
+
+
+// .nc-SectionHero2Item__left {
+//   animation: fadeIn 1s ease-out forwards;
+// }
+
+// .nc-SectionHero2Item__subheading,
+// .nc-SectionHero2Item__heading,
+// .nc-SectionHero2Item__button {
+//   animation: fadeIn 1s ease-out forwards;
+//   opacity: 0;
+//   animation-delay: 0.2s; /* Ne hagyd el ezt a sort */
+// }
+
+// @keyframes fadeIn {
+//   0% {
+//     opacity: 0;
+//     transform: translateY(10px);
+//   }
+//   100% {
+//     opacity: 1;
+//     transform: translateY(0);
+//   }
+// }
+
+blockquote {
+  border-left: none; /* or any color */
+  padding-left: 1rem;
+  margin-left: 0;
+}
+
+.custom-category-card {
+  background-image: linear-gradient(45deg, var(--c-primary-900), var(--c-primary-500));
+}
+
+.w-\[60\%\] {
+  width: 60%;
+}
+
+.glow-effect {
+  /* Set base filter state */
+  filter: brightness(1);
+  transition: filter 0.4s ease-out, transform 0.3s ease;
+}
+
+.glow-effect:hover {
+  filter: brightness(1.3);
+  transform: scale(1);
+}
+
+.tilt-container {
+  /* This is the key change! */
+  transition: transform 0.2s ease-out;
+
+  /* Good practice for 3D transforms */
+  transform-style: preserve-3d;
+}
+
+#SJhEFU0 > a > img {
+  height: 3rem;
+  display: flex;
+  justify-self: center;
+}
+
+.slider {
+  @apply w-full h-1 my-4 bg-gray-200 dark:bg-gray-700 rounded-full cursor-pointer;
+}
+
+.slider .thumb {
+  @apply w-4 h-4 -top-1.5 bg-primary-500 rounded-full cursor-grab focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 dark:focus:ring-offset-gray-800;
+}
+
+.slider .track {
+  @apply h-full rounded-full;
+}
+
+/* Style for the track segment between the two thumbs */
+.slider .track-1 {
+  @apply bg-primary-500;
+}
+
+body > div.p-4.max-w-4xl.mx-auto > div > p > strong{
+  color: var(--c-menu-text-light);
+}
+
+body > div.p-4.max-w-4xl.mx-auto > div > ul > li > ul > li > a {
+  color: var(--c-menu-text-light);
+}
+
+body > div.p-4.max-w-4xl.mx-auto > div > ul > li > a {
+  color: var(--c-menu-text-light);
+}
+
+body > div.p-4.max-w-4xl.mx-auto > div strong{
+  color: var(--c-menu-text-light);
+}
+
+body > div.p-4.max-w-4xl.mx-auto > div a {
+  color: var(--c-menu-text-light);
+}
+
+
+#product-description strong {
+  color: unset !important;
+}
+
+#custom-page a{
+  text-decoration: none;
+}
+
+#custom-page strong {
+  color: unset !important;
+}
+
+/* Accessibility Widget Global Styles */
+/* These styles work alongside your existing Tailwind classes without interference */
+/* IMPORTANT: Import this AFTER your globals.css for proper override */
+
+:root {
+  --a11y-font-scale: 1;
+  --a11y-line-height: 1;
+  --a11y-letter-spacing: 0px;
+  --a11y-font-family: '';
+  --a11y-saturation: 100%;
+}
+
+/* Reset when no accessibility features are active */
+body:not(.a11y-active) {
+  --a11y-font-scale: 1;
+  --a11y-line-height: 1;
+  --a11y-letter-spacing: 0px;
+  --a11y-font-family: '';
+}
+
+/* Font scaling - Works properly with existing sizes */
+/* Uses zoom for better compatibility - scales everything proportionally */
+html.a11y-font-active {
+  font-size: calc(100% * var(--a11y-font-scale)) !important;
+}
+
+/* Alternative method using zoom for better results */
+body.a11y-font-active {
+  zoom: var(--a11y-font-scale);
+}
+
+/* Line height adjustment - adds to existing line height */
+body.a11y-line-active * {
+  line-height: calc(1em * var(--a11y-line-height)) !important;
+}
+
+body.a11y-letter-active * {
+  letter-spacing: var(--a11y-letter-spacing) !important;
+}
+
+/* Don't apply zoom to the accessibility widget itself */
+body.a11y-font-active .fixed[aria-label="Open accessibility settings"],
+body.a11y-font-active [role="dialog"] {
+  zoom: 1 !important;
+}
+
+/* Specific text element adjustments for line height */
+body.a11y-line-active h1, body.a11y-line-active h2, body.a11y-line-active h3,
+body.a11y-line-active h4, body.a11y-line-active h5, body.a11y-line-active h6,
+body.a11y-line-active p, body.a11y-line-active span, body.a11y-line-active a,
+body.a11y-line-active li, body.a11y-line-active div {
+  line-height: calc(1em * var(--a11y-line-height)) !important;
+}
+
+/* Font family override - more specific to override Tailwind AND your custom fonts */
+body.a11y-font-family-active *:not(code):not(pre):not([class*="accessibility-widget"]) {
+  font-family: var(--a11y-font-family) !important;
+}
+
+/* Override specific font classes from your globals.css */
+body.a11y-font-family-active .instrument h1,
+body.a11y-font-family-active .instrument h2,
+body.a11y-font-family-active .instrument h3,
+body.a11y-font-family-active .instrument h4,
+body.a11y-font-family-active .instrument h5,
+body.a11y-font-family-active .instrument h6,
+body.a11y-font-family-active .spacegrotesk h1,
+body.a11y-font-family-active .spacegrotesk h2,
+body.a11y-font-family-active .spacegrotesk h3,
+body.a11y-font-family-active .spacegrotesk h4,
+body.a11y-font-family-active .spacegrotesk h5,
+body.a11y-font-family-active .spacegrotesk h6,
+body.a11y-font-family-active .beatrice-kanit h1,
+body.a11y-font-family-active .beatrice-kanit h2,
+body.a11y-font-family-active .beatrice-kanit h3,
+body.a11y-font-family-active .beatrice-kanit h4,
+body.a11y-font-family-active .beatrice-kanit h5,
+body.a11y-font-family-active .beatrice-kanit h6,
+body.a11y-font-family-active .teko-font h1,
+body.a11y-font-family-active .teko-font h2,
+body.a11y-font-family-active .teko-font h3,
+body.a11y-font-family-active .teko-font h4,
+body.a11y-font-family-active .teko-font h5,
+body.a11y-font-family-active .teko-font h6,
+body.a11y-font-family-active .khand h1,
+body.a11y-font-family-active .khand h2,
+body.a11y-font-family-active .khand h3,
+body.a11y-font-family-active .khand h4,
+body.a11y-font-family-active .khand h5,
+body.a11y-font-family-active .khand h6,
+body.a11y-font-family-active .instrument-ai h1,
+body.a11y-font-family-active .instrument-ai h2,
+body.a11y-font-family-active .instrument-ai h3,
+body.a11y-font-family-active .instrument-ai h4,
+body.a11y-font-family-active .instrument-ai h5,
+body.a11y-font-family-active .instrument-ai h6,
+body.a11y-font-family-active .plus-jakarta h1,
+body.a11y-font-family-active .plus-jakarta h2,
+body.a11y-font-family-active .plus-jakarta h3,
+body.a11y-font-family-active .plus-jakarta h4,
+body.a11y-font-family-active .plus-jakarta h5,
+body.a11y-font-family-active .plus-jakarta h6 {
+  font-family: var(--a11y-font-family) !important;
+}
+
+/* Override ALL font-* utility classes from Tailwind */
+body.a11y-font-family-active [class*="font-spacegrotesk"],
+body.a11y-font-family-active [class*="font-instrument"],
+body.a11y-font-family-active [class*="font-beatricetrial"],
+body.a11y-font-family-active [class*="font-teko"],
+body.a11y-font-family-active [class*="font-khand"],
+body.a11y-font-family-active [class*="font-plusjakartasans"],
+body.a11y-font-family-active [class*="font-primary"] {
+  font-family: var(--a11y-font-family) !important;
+}
+
+/* High Contrast Mode */
+.a11y-high-contrast {
+  filter: contrast(150%);
+}
+
+.a11y-higher-contrast {
+  filter: contrast(200%);
+}
+
+/* Saturation */
+html {
+  filter: saturate(var(--a11y-saturation));
+}
+
+/* Invert Colors */
+.a11y-invert {
+  filter: invert(1) hue-rotate(180deg) saturate(var(--a11y-saturation));
+}
+
+.a11y-invert img,
+.a11y-invert video,
+.a11y-invert [style*="background-image"] {
+  filter: invert(1) hue-rotate(180deg);
+}
+
+/* Grayscale */
+.a11y-grayscale {
+  filter: grayscale(100%) saturate(var(--a11y-saturation));
+}
+
+/* Disable Animations - Works with GSAP and all animation libraries */
+.a11y-no-animations,
+.a11y-no-animations *,
+.a11y-no-animations *::before,
+.a11y-no-animations *::after {
+  animation-duration: 0.001ms !important;
+  animation-delay: 0s !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+  transition-delay: 0s !important;
+  scroll-behavior: auto !important;
+}
+
+/* Disable GSAP animations specifically */
+.a11y-no-animations * {
+  animation: none !important;
+  transition: none !important;
+}
+
+/* Force stop all transforms that GSAP might use */
+.a11y-no-animations * {
+  transform: none !important;
+  opacity: 1 !important;
+}
+
+/* Disable motion on video and GIFs */
+.a11y-no-animations video,
+.a11y-no-animations img[src$=".gif"] {
+  animation: none !important;
+}
+
+/* Prevent GSAP timeline animations */
+.a11y-no-animations [data-gsap],
+.a11y-no-animations [class*="gsap"] {
+  animation: none !important;
+  transition: none !important;
+  transform: none !important;
+}
+
+/* Highlight Links */
+.a11y-highlight-links a {
+  background-color: yellow !important;
+  color: black !important;
+  text-decoration: underline !important;
+  padding: 2px 4px !important;
+  border-radius: 3px !important;
+  font-weight: 600 !important;
+}
+
+.a11y-highlight-links a:hover {
+  background-color: orange !important;
+}
+
+/* Highlight Headings */
+.a11y-highlight-headings h1,
+.a11y-highlight-headings h2,
+.a11y-highlight-headings h3,
+.a11y-highlight-headings h4,
+.a11y-highlight-headings h5,
+.a11y-highlight-headings h6 {
+  background-color: #e0f2fe !important;
+  padding: 8px 12px !important;
+  border-left: 4px solid #0284c7 !important;
+  margin: 12px 0 !important;
+  border-radius: 4px !important;
+}
+
+/* Text Spacing for Dyslexia */
+.a11y-text-spacing * {
+  letter-spacing: 0.12em !important;
+  word-spacing: 0.16em !important;
+  line-height: 1.8 !important;
+}
+
+.a11y-text-spacing p {
+  margin-bottom: 2em !important;
+}
+
+/* Hide Images */
+.a11y-hide-images img,
+.a11y-hide-images video,
+.a11y-hide-images [style*="background-image"],
+.a11y-hide-images picture,
+.a11y-hide-images svg {
+  opacity: 0.1 !important;
+  filter: grayscale(100%) !important;
+}
+
+/* Focus Indicators - Enhanced for motor impairments */
+.a11y-enabled *:focus {
+  outline: 3px solid #3b82f6 !important;
+  outline-offset: 3px !important;
+}
+
+/* Large Cursor Helpers */
+html[style*="cursor"] button,
+html[style*="cursor"] a,
+html[style*="cursor"] input,
+html[style*="cursor"] select,
+html[style*="cursor"] textarea {
+  cursor: inherit !important;
+}
+
+/* Skip to main content link - for screen readers */
+.skip-to-main {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: #000;
+  color: white;
+  padding: 8px;
+  text-decoration: none;
+  z-index: 100;
+}
+
+.skip-to-main:focus {
+  top: 0;
+}
+
+/* Screen Reader Only - helper class you can use in your components */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Print styles - ensure accessibility settings don't affect printing */
+@media print {
+  .a11y-highlight-links a {
+    background-color: transparent !important;
+    color: inherit !important;
+  }
+
+  .a11y-highlight-headings h1,
+  .a11y-highlight-headings h2,
+  .a11y-highlight-headings h3,
+  .a11y-highlight-headings h4,
+  .a11y-highlight-headings h5,
+  .a11y-highlight-headings h6 {
+    background-color: transparent !important;
+    border: none !important;
+  }
+}
+
+/* Ensure widget itself is always visible */
+button[aria-label="Open accessibility settings"],
+div[class*="accessibility-widget"] {
+  font-size: 16px !important;
+  line-height: 1.5 !important;
+  letter-spacing: 0 !important;
+}
+
+.notavailable:after {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  height: 1px;
+  background: #c00;
+  content: "";
+  width: 100%;
+  display: block;
+  transform: rotate(135deg);
+}

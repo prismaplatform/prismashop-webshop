@@ -1,0 +1,29 @@
+{
+  "CustomMenu":{
+    "1": {
+      "name": "Despre",
+      "href": "/about",
+      "order": 1
+    },
+    "2": {
+      "name": "Atelier",
+      "href": "/help/atelier",
+      "order": 2
+    },
+    "3": {
+      "name": "Hârtie",
+      "href": "/help/atelier",
+      "order": 3
+    },
+    "4": {
+      "name": "Papetarie nunta",
+      "href": "/help/nunta",
+      "order": 4
+    },
+    "5": {
+      "name": "Muzeu",
+      "href": "/b2b",
+      "order": 5
+    }
+  }
+}
