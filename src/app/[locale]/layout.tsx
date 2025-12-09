@@ -124,7 +124,7 @@ export default async function RootLayout({
   //   redirect(`/${defaultLocale}`);
   // }
 
-  redirect(`/de`);
+  redirect("/de");
 
   const compiledCss = await getCompiledScss(domain);
   const marketingIds = await getMarketingTags(domain);
