@@ -29,6 +29,7 @@ import { DomainProvider } from "@/components/app/DomainProvider";
 import AccessibilityWidget from "@/components/layout/AccessibilityWidget";
 
 import {getServerDomain, getServerDomainSlugified} from "@/utils/host-resolver.server";
+import { domainConfigs, GLOBAL_DEFAULT_LOCALE } from "@/data/domain-config";
 
 const DynamicNewsletterModal = dynamic(
   () => import("@/components/ui/Modal/NewsletterModal"),
@@ -124,12 +125,18 @@ export default async function RootLayout({
     (lang: Language) => lang.slug,
   );
 
-  if (!supportedLocales.includes(locale)) {
-    const defaultLocale = supportedLocales.includes("ro")
-      ? "ro"
-      : supportedLocales[0] || "ro";
-    redirect(`/${defaultLocale}`);
-  }
+    if (!supportedLocales.includes(locale)) {
+        const configDefault = domainConfigs[slugifiedDomain]?.defaultLocale;
+        let targetLocale = "";
+        if (configDefault && supportedLocales.includes(configDefault)) {
+            targetLocale = configDefault;
+        } else {
+            targetLocale = supportedLocales[0] || GLOBAL_DEFAULT_LOCALE;
+        }
+        if (targetLocale) {
+            redirect(`/${targetLocale}`);
+        }
+    }
 
   const [compiledCss, marketingIds, barionIds, messages] = await Promise.all([
     getCompiledScss(slugifiedDomain),
