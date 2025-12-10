@@ -3,11 +3,7 @@
 import React, { FC, useEffect, useState } from "react";
 // import LikeButton from "./LikeButton";
 import { ShopProductDto } from "@/models/product.model";
-import {
-  ChevronDoubleRightIcon,
-  StarIcon,
-  TagIcon,
-} from "@heroicons/react/24/solid";
+import { ChevronDoubleRightIcon, StarIcon, TagIcon } from "@heroicons/react/24/solid";
 import Image from "next/image";
 import { Link } from "@/i18n/routing";
 import Prices from "../../ui/Prices/Prices";
@@ -150,7 +146,7 @@ const ProductCard: FC<ProductCardProps> = ({ className = "", data, index }) => {
     if (typeof window !== "undefined") {
       let domain = slugifyDomain(window.location.host);
       if (domain.includes("localhost")) {
-        domain = slugifyDomain("https://letrafutar.hu");
+        domain = slugifyDomain("https://homesync.ro");
       }
       let root = "https://" + domain + ".s3.eu-west-1.amazonaws.com/";
       setRootUrl(root);

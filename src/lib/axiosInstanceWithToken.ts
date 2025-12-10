@@ -24,7 +24,7 @@ axiosInstanceWithToken.interceptors.request.use(
     // Add the Tenant-Id header if we have the tenantId
     if (tenantId) {
       if (tenantId.includes("localhost")) {
-        config.headers["Tenant-Id"] = "https://letrafutar.hu";
+        config.headers["Tenant-Id"] = "https://homesync.ro";
       } else {
         config.headers["Tenant-Id"] = "https://" + tenantId;
       }

@@ -156,7 +156,7 @@ const SimplifiedCheckoutFormWithShipping: FC = () => {
     if (typeof window !== "undefined") {
       let domain = window.location.hostname.replace(/www\.|[^a-zA-Z0-9]/g, "");
       if (domain.includes("localhost")) {
-        domain = "letrafutarhu"; // Mock domain for local development
+        domain = "homesyncro"; // Mock domain for local development
       }
       setRootUrl(`https://${domain}.s3.eu-west-1.amazonaws.com/products/`);
     }

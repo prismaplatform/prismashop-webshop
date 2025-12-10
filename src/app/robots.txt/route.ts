@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server";
-import { resolveDomain } from "@/utils/hostResolver";
+import { getServerDomain } from "@/utils/host-resolver.server";
 
 export function GET() {
-  const domain = resolveDomain();
+  const domain = getServerDomain();
 
   const body = `User-agent: *
 Disallow:

@@ -33,7 +33,7 @@ export default function Cart() {
     if (typeof window !== "undefined") {
       let domain = slugifyDomain(window.location.host);
       if (domain.includes("localhost")) {
-        domain = slugifyDomain("https://letrafutar.hu");
+        domain = slugifyDomain("https://homesync.ro");
       }
       if (domain.includes("localhost")) {
       }

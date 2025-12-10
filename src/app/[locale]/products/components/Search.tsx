@@ -35,7 +35,7 @@ const Search = () => {
     if (typeof window !== "undefined") {
       let domain = slugifyDomain(window.location.host);
       if (domain.includes("localhost")) {
-        domain = slugifyDomain("https://letrafutar.hu");
+        domain = slugifyDomain("https://homesync.ro");
       }
       let root = "https://" + domain + ".s3.eu-west-1.amazonaws.com/";
       setRootUrl(root);

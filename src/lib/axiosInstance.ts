@@ -48,7 +48,7 @@ axiosInstance.interceptors.request.use(
     // --- Set Tenant-Id Header ---
     if (tenantId) {
       if (tenantId.includes("localhost")) {
-        config.headers["Tenant-Id"] = "https://letrafutar.hu";
+        config.headers["Tenant-Id"] = "https://homesync.ro";
       } else {
         if (tenantId.includes("https://")) {
           config.headers["Tenant-Id"] = tenantId;

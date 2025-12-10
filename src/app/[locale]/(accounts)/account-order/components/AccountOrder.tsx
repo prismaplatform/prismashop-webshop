@@ -22,7 +22,7 @@ const AccountOrder = () => {
     if (typeof window !== "undefined") {
       let domainC = slugifyDomain(window.location.host);
       if (domainC.includes("localhost")) {
-        domainC = slugifyDomain("https://letrafutar.hu");
+        domainC = slugifyDomain("https://homesync.ro");
       }
       let root = "https://" + domainC + ".s3.eu-west-1.amazonaws.com/products/";
       setRootUrl(root);

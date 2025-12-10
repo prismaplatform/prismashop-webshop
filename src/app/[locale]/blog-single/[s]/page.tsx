@@ -31,7 +31,7 @@ export async function generateMetadata(
   const headersList = headers();
   const hostname = headersList.get("host") || "";
   let domain = slugifyDomain(hostname);
-  domain = domain.includes("localhost") ? "letrafutarhu" : domain;
+  domain = domain.includes("localhost") ? "homesyncro" : domain;
 
   let blogPost = null;
   if (slug) {

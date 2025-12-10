@@ -1,6 +1,5 @@
-// /app/[locale]/layout.tsx
-
-import { cookies } from "next/headers"; // ✅ Import 'headers'
+import React from "react";
+import { cookies } from "next/headers";
 import { Poppins } from "next/font/google";
 import "../globals.css";
 import "@/fonts/line-awesome-1.3.0/css/line-awesome.css";
@@ -9,11 +8,9 @@ import "rc-slider/assets/index.css";
 import Footer from "@/components/ui/Footer/Footer";
 import { Toaster } from "react-hot-toast";
 import { compileString } from "sass";
-import React from "react";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import Providers from "@/lib/Providers";
-import { resolveDomain, slugifyDomain } from "@/utils/hostResolver";
 import { getConfigurationUrlWithDomain } from "@/utils/configurationHelper";
 import { MarketingIdDto } from "@/models/marketing-ids.model";
 import GtmProvider from "@/components/app/gtm-provider";
@@ -31,12 +28,11 @@ import Script from "next/script";
 import { DomainProvider } from "@/components/app/DomainProvider";
 import AccessibilityWidget from "@/components/layout/AccessibilityWidget";
 
+import { getServerDomain } from "@/utils/host-resolver.server";
+
 const DynamicNewsletterModal = dynamic(
   () => import("@/components/ui/Modal/NewsletterModal"),
-  {
-    ssr: false,
-    loading: () => null,
-  },
+  { ssr: false, loading: () => null },
 );
 
 const PixelTracker = dynamic(() => import("@/components/app/PixelTracker"), {
@@ -58,53 +54,63 @@ export default async function RootLayout({
   children: React.ReactNode;
   params: { locale: string };
 }) {
-  const domain = "leiterkuriercom";
-  
+  const domain = getServerDomain();
+  console.log("Resolved domain:", domain);
+
   const cookieStore = cookies();
 
   async function getCompiledScss(domain: string) {
+    if (!domain) return "";
     const styleConfigUrl = getConfigurationUrlWithDomain(domain) + "theme.scss";
     try {
-      const response = await fetch(styleConfigUrl);
-      if (!response.ok)
-        throw new Error(`Failed to fetch SCSS file: ${response.statusText}`);
+      const response = await fetch(styleConfigUrl, {
+        next: { revalidate: 3600 },
+      });
+      if (!response.ok) return ""; // Fail silently, use default CSS
       const scssText = await response.text();
       return compileString(scssText).css;
     } catch (error) {
-      console.error("Error fetching or compiling SCSS:", error);
+      console.error(`SCSS Load Error for ${domain}:`, error);
       return "";
     }
   }
 
   async function getBarionPixelId(domain: string): Promise<BarionPixelIdDto> {
+    if (!domain) return { barionPixelId: "" };
     const barionUrl = getConfigurationUrlWithDomain(domain) + "barion.json";
     try {
-      const response = await fetch(barionUrl);
-      if (!response.ok) {
-        return {
-          barionPixelId: "",
-        };
-      }
+      const response = await fetch(barionUrl, { next: { revalidate: 3600 } });
+      if (!response.ok) return { barionPixelId: "" };
       return await response.json();
     } catch (error) {
-      return {
-        barionPixelId: "",
-      };
+      return { barionPixelId: "" };
     }
   }
 
   async function getMarketingTags(domain: string): Promise<MarketingIdDto> {
+    if (!domain)
+      return {
+        googleTagManagerId: "",
+        metaPixelId: "",
+        microsoftClarityId: "",
+      };
     const marketingConfigUrl =
       getConfigurationUrlWithDomain(domain) + "marketing.json";
     try {
-      const response = await fetch(marketingConfigUrl);
-      if (!response.ok)
-        throw new Error(
-          `Failed to fetch marketing file: ${response.statusText}`,
-        );
+      const response = await fetch(marketingConfigUrl, {
+        next: { revalidate: 3600 },
+      });
+      if (!response.ok) {
+        console.warn(`Marketing JSON missing for ${domain}`);
+        return {
+          googleTagManagerId: "",
+          metaPixelId: "",
+          microsoftClarityId: "",
+        };
+      }
       return await response.json();
     } catch (error) {
-      console.error("Error fetching marketing tags:", error);
+      console.error(`Marketing Load Error for ${domain}:`, error);
       return {
         googleTagManagerId: "",
         metaPixelId: "",
@@ -113,20 +119,27 @@ export default async function RootLayout({
     }
   }
 
-  const supportedLocales = ["de"];
+  const availableLanguages = await getLanguages();
+  const supportedLocales = availableLanguages.map(
+    (lang: Language) => lang.slug,
+  );
+
   if (!supportedLocales.includes(locale)) {
-     redirect("/de");
+    const defaultLocale = supportedLocales.includes("ro")
+      ? "ro"
+      : supportedLocales[0] || "ro";
+    redirect(`/${defaultLocale}`);
   }
 
-  const compiledCss = await getCompiledScss(domain);
-  const marketingIds = await getMarketingTags(domain);
-  const barionIds = await getBarionPixelId(domain);
-  const messages = await getMessages();
+  const [compiledCss, marketingIds, barionIds, messages] = await Promise.all([
+    getCompiledScss(domain),
+    getMarketingTags(domain),
+    getBarionPixelId(domain),
+    getMessages(),
+  ]);
 
   let currency;
-
   const currencyCookie = cookieStore.get("currency");
-
   if (currencyCookie?.value) {
     try {
       currency = JSON.parse(currencyCookie.value);
@@ -144,8 +157,13 @@ export default async function RootLayout({
           rel="icon"
           href={`https://daxxgn860i5ze.cloudfront.net/${domain}/favicon.ico`}
         />
-        <style dangerouslySetInnerHTML={{ __html: compiledCss }} />
+
+        {compiledCss && (
+          <style dangerouslySetInnerHTML={{ __html: compiledCss }} />
+        )}
+
         <GtmInit id={marketingIds.googleTagManagerId} />
+
         {marketingIds.microsoftClarityId && (
           <script
             type="text/javascript"
@@ -188,9 +206,8 @@ export default async function RootLayout({
             style={{ display: "none", visibility: "hidden" }}
           ></iframe>
         </noscript>
-        <PixelTracker
-          id={marketingIds.metaPixelId}
-        />
+
+        <PixelTracker id={marketingIds.metaPixelId} />
 
         {barionIds.barionPixelId && (
           <noscript>
@@ -204,7 +221,6 @@ export default async function RootLayout({
           </noscript>
         )}
 
-
         <Providers>
           <DomainProvider domain={domain}>
             <NextIntlClientProvider locale={locale} messages={messages}>
@@ -212,18 +228,15 @@ export default async function RootLayout({
                 <InitCurrencyCookie />
                 <Banner />
                 <HeaderLogged domain={domain} />
-                {/*<AccessibilityWrapper>*/}
                 {children}
-                {/*</AccessibilityWrapper>*/}
                 <GtmProvider id={marketingIds.googleTagManagerId} />
                 <Footer domain={domain} />
-                {/* <DynamicNewsletterModal /> */}
                 <Toaster position="top-right" />
               </CurrencyProvider>
             </NextIntlClientProvider>
           </DomainProvider>
         </Providers>
-      <AccessibilityWidget/>
+        <AccessibilityWidget />
       </body>
     </html>
   );

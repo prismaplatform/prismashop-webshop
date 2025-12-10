@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { resolveDomain, slugifyDomain } from "@/utils/hostResolver";
+import { getServerDomain } from "@/utils/host-resolver.server";
 
 // Add this export
 export const dynamic = "force-dynamic";
@@ -15,7 +15,7 @@ export const dynamic = "force-dynamic";
 async function getDynamicIconUrl(): Promise<string> {
   // --- Your Dynamic Logic is Integrated Here ---
   // It resolves the domain from the request and creates a slug for the URL.
-  const domain = slugifyDomain(resolveDomain());
+  const domain = getServerDomain();
   const iconUrl = `https://daxxgn860i5ze.cloudfront.net/${domain}/favicon.ico`;
 
   return iconUrl;

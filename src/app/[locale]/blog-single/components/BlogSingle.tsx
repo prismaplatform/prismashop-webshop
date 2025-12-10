@@ -37,7 +37,7 @@ const BlogSingle = ({ s }: { s: string }) => {
   useEffect(() => {
     if (typeof window !== "undefined") {
       const domain = slugifyDomain(window.location.host);
-      const finalDomain = domain.includes("localhost") ? "letrafutarhu" : domain;
+      const finalDomain = domain.includes("localhost") ? "homesyncro" : domain;
       setRootUrl(`https://${finalDomain}.s3.eu-west-1.amazonaws.com/blogs/`);
       setRootUrlLogo(
         `https://s3stack-configuration21549683-egopugffrx7u.s3.eu-west-1.amazonaws.com/${finalDomain}/logo.webp`,

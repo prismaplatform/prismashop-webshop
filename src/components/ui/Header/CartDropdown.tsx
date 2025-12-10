@@ -1,11 +1,6 @@
 "use client";
 
-import {
-  Popover,
-  PopoverButton,
-  PopoverPanel,
-  Transition,
-} from "@/app/ui/headlessui";
+import { Popover, PopoverButton, PopoverPanel, Transition } from "@/app/ui/headlessui";
 import Prices from "@/components/ui/Prices/Prices";
 import ButtonPrimary from "@/components/ui/Button/ButtonPrimary";
 import ButtonSecondary from "@/components/ui/Button/ButtonSecondary";
@@ -35,7 +30,7 @@ export default function CartDropdown() {
     if (typeof window !== "undefined") {
       let domain = slugifyDomain(window.location.host);
       if (domain.includes("localhost")) {
-        domain = slugifyDomain("https://letrafutar.hu");
+        domain = slugifyDomain("https://homesync.ro");
       }
       let root = "https://" + domain + ".s3.eu-west-1.amazonaws.com/products/";
       setRootUrl(root);

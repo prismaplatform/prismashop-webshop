@@ -45,7 +45,7 @@ export async function generateMetadata({
     const protocol = headersList.get("x-forwarded-proto") || "https";
     let imageDomain = slugifyDomain(host);
     imageDomain = imageDomain.includes("localhost")
-      ? "letrafutarhu"
+      ? "homesyncro"
       : imageDomain;
     const domain = `${protocol}://${host}`;
 

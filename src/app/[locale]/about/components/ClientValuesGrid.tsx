@@ -34,7 +34,7 @@ export default function ClientValuesGrid({
 
     let domain = slugifyDomain(window.location.host);
     if (domain.includes("localhost")) {
-      domain = slugifyDomain("https://letrafutar.hu");
+      domain = slugifyDomain("https://homesync.ro");
     }
     // const root = `https://${domain}.s3.eu-west-1.amazonaws.com/about/`;
   }, []);
