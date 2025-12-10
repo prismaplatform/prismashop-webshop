@@ -1,9 +1,11 @@
+// i18n/routing.ts
 import { createNavigation } from "next-intl/navigation";
 import { defineRouting } from "next-intl/routing";
 
 export const routing = defineRouting({
-  locales: ["ro", "hu", "de", "en"],
-  defaultLocale: "ro",
+    // List ALL languages supported by ANY of your shops
+    locales: ["ro", "hu", "de", "en"],
+    defaultLocale: "ro",
 });
 
 export type Locale = (typeof routing.locales)[number];

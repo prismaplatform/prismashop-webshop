@@ -1,9 +1,19 @@
 import createMiddleware from "next-intl/middleware";
 import { routing } from "./i18n/routing";
 import { NextRequest, NextResponse } from "next/server";
+import { domainConfigs, GLOBAL_DEFAULT_LOCALE } from "@/data/domain-config";
 
 export default function middleware(request: NextRequest) {
   const hostname = request.headers.get("host") || "";
+  let cleanHost = hostname
+    .replace(/^https?:\/\//, "")
+    .replace(/^www\./, "")
+    .split(":")[0];
+  cleanHost = cleanHost
+    .replace(".prismasolutions.ro", "")
+    .replace(".prismaweb.ro", "");
+  const domainDefault =
+    domainConfigs[cleanHost]?.defaultLocale || GLOBAL_DEFAULT_LOCALE;
 
   if (hostname.includes(".vercel.app")) {
     const response = NextResponse.next();
@@ -21,9 +31,10 @@ export default function middleware(request: NextRequest) {
     const userLocales = acceptLanguage
       .split(",")
       .map((lang) => lang.split(";")[0].split("-")[0]);
+
     locale =
       userLocales.find((loc) => routing.locales.includes(loc as any)) ||
-      routing.defaultLocale;
+      domainDefault;
   }
 
   const intlMiddleware = createMiddleware(routing);

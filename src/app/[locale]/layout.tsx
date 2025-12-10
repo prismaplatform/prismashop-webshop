@@ -28,7 +28,7 @@ import Script from "next/script";
 import { DomainProvider } from "@/components/app/DomainProvider";
 import AccessibilityWidget from "@/components/layout/AccessibilityWidget";
 
-import {getServerDomain, getServerDomainSlugified} from "@/utils/host-resolver.server";
+import {getServerDomainSlugified} from "@/utils/host-resolver.server";
 import { domainConfigs, GLOBAL_DEFAULT_LOCALE } from "@/data/domain-config";
 
 const DynamicNewsletterModal = dynamic(
@@ -55,7 +55,6 @@ export default async function RootLayout({
   children: React.ReactNode;
   params: { locale: string };
 }) {
-  const domain = getServerDomain();
   const slugifiedDomain = getServerDomainSlugified();
 
   const cookieStore = cookies();
