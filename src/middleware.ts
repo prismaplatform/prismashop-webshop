@@ -12,8 +12,10 @@ export default function middleware(request: NextRequest) {
   cleanHost = cleanHost
     .replace(".prismasolutions.ro", "")
     .replace(".prismaweb.ro", "");
+
+  let slugifiedHost = cleanHost.replace(/[^a-zA-Z0-9]/g, "");
   const domainDefault =
-    domainConfigs[cleanHost]?.defaultLocale || GLOBAL_DEFAULT_LOCALE;
+    domainConfigs[slugifiedHost]?.defaultLocale || GLOBAL_DEFAULT_LOCALE;
 
   if (hostname.includes(".vercel.app")) {
     const response = NextResponse.next();
