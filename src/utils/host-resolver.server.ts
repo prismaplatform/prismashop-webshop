@@ -14,7 +14,18 @@ export function getServerDomain(): string {
 
   domain = domain.replace(/[^a-zA-Z0-9.-]/g, "");
   if (domain == "localhost") {
-    domain = "homesyncro";
+    domain = "homesync.ro";
   }
   return domain;
 }
+
+export function getServerDomainSlugified(): string {
+    const domain = getServerDomain();
+    let host = domain.replace(/^https?:\/\//, "").replace(/^www\./, "");
+    host = host.replace(".prismasolutions.ro", "").replace(".prismaweb.ro", "");
+    return host.replace(/[^a-zA-Z0-9]/g, "");
+}
+
+
+
+

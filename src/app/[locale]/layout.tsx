@@ -28,7 +28,7 @@ import Script from "next/script";
 import { DomainProvider } from "@/components/app/DomainProvider";
 import AccessibilityWidget from "@/components/layout/AccessibilityWidget";
 
-import { getServerDomain } from "@/utils/host-resolver.server";
+import {getServerDomain, getServerDomainSlugified} from "@/utils/host-resolver.server";
 
 const DynamicNewsletterModal = dynamic(
   () => import("@/components/ui/Modal/NewsletterModal"),
@@ -55,13 +55,13 @@ export default async function RootLayout({
   params: { locale: string };
 }) {
   const domain = getServerDomain();
-  console.log("Resolved domain:", domain);
+  const slugifiedDomain = getServerDomainSlugified();
 
   const cookieStore = cookies();
 
-  async function getCompiledScss(domain: string) {
-    if (!domain) return "";
-    const styleConfigUrl = getConfigurationUrlWithDomain(domain) + "theme.scss";
+  async function getCompiledScss(slugifiedDomain: string) {
+    if (!slugifiedDomain) return "";
+    const styleConfigUrl = getConfigurationUrlWithDomain(slugifiedDomain) + "theme.scss";
     try {
       const response = await fetch(styleConfigUrl, {
         next: { revalidate: 3600 },
@@ -70,14 +70,14 @@ export default async function RootLayout({
       const scssText = await response.text();
       return compileString(scssText).css;
     } catch (error) {
-      console.error(`SCSS Load Error for ${domain}:`, error);
+      console.error(`SCSS Load Error for ${slugifiedDomain}:`, error);
       return "";
     }
   }
 
-  async function getBarionPixelId(domain: string): Promise<BarionPixelIdDto> {
-    if (!domain) return { barionPixelId: "" };
-    const barionUrl = getConfigurationUrlWithDomain(domain) + "barion.json";
+  async function getBarionPixelId(slugifiedDomain: string): Promise<BarionPixelIdDto> {
+    if (!slugifiedDomain) return { barionPixelId: "" };
+    const barionUrl = getConfigurationUrlWithDomain(slugifiedDomain) + "barion.json";
     try {
       const response = await fetch(barionUrl, { next: { revalidate: 3600 } });
       if (!response.ok) return { barionPixelId: "" };
@@ -87,21 +87,21 @@ export default async function RootLayout({
     }
   }
 
-  async function getMarketingTags(domain: string): Promise<MarketingIdDto> {
-    if (!domain)
+  async function getMarketingTags(slugifiedDomain: string): Promise<MarketingIdDto> {
+    if (!slugifiedDomain)
       return {
         googleTagManagerId: "",
         metaPixelId: "",
         microsoftClarityId: "",
       };
     const marketingConfigUrl =
-      getConfigurationUrlWithDomain(domain) + "marketing.json";
+      getConfigurationUrlWithDomain(slugifiedDomain) + "marketing.json";
     try {
       const response = await fetch(marketingConfigUrl, {
         next: { revalidate: 3600 },
       });
       if (!response.ok) {
-        console.warn(`Marketing JSON missing for ${domain}`);
+        console.warn(`Marketing JSON missing for ${slugifiedDomain}`);
         return {
           googleTagManagerId: "",
           metaPixelId: "",
@@ -110,7 +110,7 @@ export default async function RootLayout({
       }
       return await response.json();
     } catch (error) {
-      console.error(`Marketing Load Error for ${domain}:`, error);
+      console.error(`Marketing Load Error for ${slugifiedDomain}:`, error);
       return {
         googleTagManagerId: "",
         metaPixelId: "",
@@ -132,9 +132,9 @@ export default async function RootLayout({
   }
 
   const [compiledCss, marketingIds, barionIds, messages] = await Promise.all([
-    getCompiledScss(domain),
-    getMarketingTags(domain),
-    getBarionPixelId(domain),
+    getCompiledScss(slugifiedDomain),
+    getMarketingTags(slugifiedDomain),
+    getBarionPixelId(slugifiedDomain),
     getMessages(),
   ]);
 
@@ -155,7 +155,7 @@ export default async function RootLayout({
       <head>
         <link
           rel="icon"
-          href={`https://daxxgn860i5ze.cloudfront.net/${domain}/favicon.ico`}
+          href={`https://daxxgn860i5ze.cloudfront.net/${slugifiedDomain}/favicon.ico`}
         />
 
         {compiledCss && (
@@ -222,15 +222,15 @@ export default async function RootLayout({
         )}
 
         <Providers>
-          <DomainProvider domain={domain}>
+          <DomainProvider domain={slugifiedDomain}>
             <NextIntlClientProvider locale={locale} messages={messages}>
               <CurrencyProvider value={currency}>
                 <InitCurrencyCookie />
                 <Banner />
-                <HeaderLogged domain={domain} />
+                <HeaderLogged domain={slugifiedDomain} />
                 {children}
                 <GtmProvider id={marketingIds.googleTagManagerId} />
-                <Footer domain={domain} />
+                <Footer domain={slugifiedDomain} />
                 <Toaster position="top-right" />
               </CurrencyProvider>
             </NextIntlClientProvider>
